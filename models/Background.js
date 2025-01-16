@@ -1,18 +1,29 @@
-const { DataTypes } = require('sequelize');
-const { sequelize } = require('../config/database');
+const { Model, DataTypes } = require('sequelize');
+const { sequelize } = require('../config/database'); // Asegúrate de importar correctamente
 
-const Background = sequelize.define('Background', {
-    id: {
-        type: DataTypes.INTEGER,
-        primaryKey: true,
-        autoIncrement: true,
-    },
-    name: {
+class Background extends Model {}
+
+Background.init({
+    background_name: {
         type: DataTypes.STRING,
         allowNull: false,
+        validate: {
+            notNull: {
+                msg: 'El nombre del fondo no puede estar vacío.'
+            },
+            notEmpty: {
+                msg: 'El nombre del fondo no puede estar vacío.'
+            }
+        }
+    },
+    description: {
+        type: DataTypes.TEXT,
+        allowNull: true,
     },
 }, {
-    timestamps: true,
+    sequelize,
+    modelName: 'Background',
+    timestamps: false, // Si deseas tener registros de fechas de creación y actualización
 });
 
 module.exports = Background;

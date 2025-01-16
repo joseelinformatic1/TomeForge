@@ -15,8 +15,6 @@ router.get('/', authMiddleware, async (req, res) => {
     }
 });
 
-
-
 // Crear un personaje para el usuario autenticado
 router.post('/', authMiddleware, async (req, res) => {
     const { name, race_id, subrace_id, class_id, subclass_id, background_id, level } = req.body;
